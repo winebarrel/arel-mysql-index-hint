@@ -21,6 +21,6 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-Article.joins(:comments).with_index_hint(comments: {any_idx_name: :force})
+Article.joins(:comments).hint(comments: {any_idx_name: :force})
 # => "SELECT `articles`.* FROM `articles` INNER JOIN `comments` force INDEX (any_idx_name) ON `comments"
 ```
