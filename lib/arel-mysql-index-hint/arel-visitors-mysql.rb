@@ -2,12 +2,7 @@ class Arel::Visitors::MySQL
   attr_accessor :index_hint_by_table
 
   def visit_Arel_Table_with_index_hint(o, a)
-    sql = if o.table_alias
-            "#{quote_table_name o.name} #{quote_table_name o.table_alias}"
-          else
-            quote_table_name o.name
-          end
-
+    sql = visit_Arel_Table_without_index_hint(o, a)
     index_hint = @index_hint_by_table.try(:[], o.name)
 
     if index_hint
