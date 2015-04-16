@@ -1,5 +1,5 @@
 class Arel::Visitors::MySQL
-  attr_writer :index_hint_by_table
+  attr_accessor :index_hint_by_table
 
   def visit_Arel_Table_with_index_hint(o, a)
     sql = if o.table_alias
