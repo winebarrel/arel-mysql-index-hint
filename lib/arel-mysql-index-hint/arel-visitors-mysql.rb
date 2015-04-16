@@ -11,7 +11,7 @@ class Arel::Visitors::MySQL
     index_hint = @index_hint_by_table.try(:[], o.name)
 
     if index_hint
-      appent_index_hint(sql, index_hint)
+      append_index_hint(sql, index_hint)
     else
       sql
     end
@@ -34,7 +34,7 @@ class Arel::Visitors::MySQL
     end
   end
 
-  def appent_index_hint(sql, index_hint)
+  def append_index_hint(sql, index_hint)
     sql + " " + index_hint.map {|index, hint_type|
       index = Array(index)
       "#{hint_type} INDEX (#{index.join(', ')})"
