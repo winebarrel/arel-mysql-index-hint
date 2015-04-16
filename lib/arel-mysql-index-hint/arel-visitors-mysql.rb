@@ -16,19 +16,6 @@ class Arel::Visitors::MySQL
 
   private
 
-  def with_index_hint(o)
-    if o.is_a?(Arel::Table)
-      begin
-        o.index_hint = @index_hint_by_table.try(:[], o.name)
-        yield(o)
-      ensure
-        o.index_hint = nil
-      end
-    else
-      yield(o)
-    end
-  end
-
   def append_index_hint(sql, index_hint)
     sql + " " + index_hint.map {|index, hint_type|
       index = Array(index)
