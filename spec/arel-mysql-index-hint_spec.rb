@@ -1,5 +1,5 @@
 describe "arel-mysql-index-hint" do
-  describe "joins" do
+  describe "#joins" do
     context "single index" do
       subject do
         User.
@@ -64,6 +64,22 @@ describe "arel-mysql-index-hint" do
         let(:hint_type) { :ignore }
         it { is_expected.to eq sql }
       end
+    end
+
+    context "without index" do
+      subject do
+        User.
+          joins(:microposts).
+          to_sql
+      end
+
+      let(:sql) do
+        "SELECT `users`.* FROM `users` " +
+        "INNER JOIN `microposts` " +
+        "ON `microposts`.`user_id` = `users`.`id`"
+      end
+
+      it { is_expected.to eq sql }
     end
   end
 end
