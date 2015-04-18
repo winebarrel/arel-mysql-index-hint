@@ -26,7 +26,16 @@ class Arel::Visitors::MySQL
 
   def get_index_hint(table)
     index_hint_by_table = Thread.current[INDEX_HINT_BY_TABLE_THREAD_KEY]
-    index_hint_by_table.try(:[], table)
+
+    if index_hint_by_table.nil? or index_hint_by_table.empty?
+      return nil
+    end
+
+    if index_hint_by_table.values.any? {|i| i.is_a?(Hash) }
+      index_hint_by_table[table]
+    else
+      index_hint_by_table
+    end
   end
 
   def clear_index_hint_by_table
