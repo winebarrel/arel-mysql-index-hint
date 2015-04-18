@@ -1,4 +1,5 @@
 require "active_support"
+require "arel-mysql-index-hint/version"
 
 ActiveSupport.on_load :active_record do
   require "arel-mysql-index-hint/active_record-hint_methods"
