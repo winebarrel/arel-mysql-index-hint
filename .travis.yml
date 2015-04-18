@@ -6,3 +6,6 @@ rvm:
 script:
   - bundle install
   - bundle exec rake
+gemfile:
+  - gemfiles/activerecord_4.1.gemfile
+  - gemfiles/activerecord_4.2.gemfile
