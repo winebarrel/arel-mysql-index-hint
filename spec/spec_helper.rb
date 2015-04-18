@@ -1,4 +1,11 @@
 require "arel-mysql-index-hint"
+require "models"
+
+$__arel_mysql_index_hint_sql_log__ = []
+
+ActiveSupport::Notifications.subscribe('sql.active_record') do |name, start, finish, id, payload|
+  $__arel_mysql_index_hint_sql_log__ << payload[:sql]
+end
 
 RSpec.configure do |config|
   config.before(:all) do
@@ -9,6 +16,10 @@ RSpec.configure do |config|
       database: 'arel_mysql_index_hint_test'
     )
   end
+
+  config.before(:each) do
+    $__arel_mysql_index_hint_sql_log__.clear
+  end
 end
 
 def init_database
@@ -16,24 +27,6 @@ def init_database
   system("mysql -uroot < #{sql_file}")
 end
 
-# Models
-# original: https://github.com/railstutorial/sample_app_rails_4
-
-class Micropost < ActiveRecord::Base
-  belongs_to :user
-end
-
-class Relationship < ActiveRecord::Base
-  belongs_to :follower, class_name: "User"
-  belongs_to :followed, class_name: "User"
-end
-
-class User < ActiveRecord::Base
-  has_many :microposts, dependent: :destroy
-  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
-  has_many :followed_users, through: :relationships, source: :followed
-  has_many :reverse_relationships, foreign_key: "followed_id",
-                                   class_name:  "Relationship",
-                                   dependent:   :destroy
-  has_many :followers, through: :reverse_relationships, source: :follower
+def sql_log
+  $__arel_mysql_index_hint_sql_log__.dup
 end
