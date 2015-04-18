@@ -9,6 +9,7 @@ if ENV['TRAVIS']
   end
 end
 
+require "active_record"
 require "arel-mysql-index-hint"
 require "models"
 
