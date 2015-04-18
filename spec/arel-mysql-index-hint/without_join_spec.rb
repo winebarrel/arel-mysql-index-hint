@@ -3,7 +3,7 @@ describe "arel-mysql-index-hint" do
     subject do
       User.
         all.
-        hint(users: {index_users_on_email: hint_type}).
+        hint(users: {hint_type => :index_users_on_email}).
         to_sql.gsub(/\s+/, " ")
     end
 
@@ -21,7 +21,7 @@ describe "arel-mysql-index-hint" do
   describe "call nothing" do
     subject do
       User.
-        hint(users: {index_users_on_email: hint_type}).
+        hint(users: {hint_type => :index_users_on_email}).
         to_sql.gsub(/\s+/, " ")
     end
 
@@ -40,7 +40,7 @@ describe "arel-mysql-index-hint" do
     subject do
       User.
         limit(1).
-        hint(users: {index_users_on_email: hint_type}).
+        hint(users: {hint_type => :index_users_on_email}).
         to_sql.gsub(/\s+/, " ")
     end
 
@@ -59,7 +59,7 @@ describe "arel-mysql-index-hint" do
   describe "#first" do
     subject do
       User.
-        hint(users: {index_users_on_email: hint_type}).
+        hint(users: {hint_type => :index_users_on_email}).
         first
     end
 
@@ -81,7 +81,7 @@ describe "arel-mysql-index-hint" do
   describe "#take" do
     subject do
       User.
-        hint(users: {index_users_on_email: hint_type}).
+        hint(users: {hint_type => :index_users_on_email}).
         take
     end
 

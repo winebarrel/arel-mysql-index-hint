@@ -6,7 +6,7 @@ if ActiveRecord::VERSION::MINOR >= 1
           User.
             eager_load(:microposts).
             where(microposts: {id: 1}).
-            hint(microposts: {index_microposts_on_user_id_and_created_at: hint_type}).
+            hint(microposts: {hint_type => :index_microposts_on_user_id_and_created_at}).
             to_sql.gsub(/\s+/, " ")
         end
 
@@ -30,8 +30,8 @@ if ActiveRecord::VERSION::MINOR >= 1
             eager_load(:microposts).
             where(microposts: {id: 1}).
             hint(
-              users: {index_users_on_email: hint_type},
-              microposts: {index_microposts_on_user_id_and_created_at: hint_type},
+              users: {hint_type => :index_users_on_email},
+              microposts: {hint_type => :index_microposts_on_user_id_and_created_at},
             ).
             to_sql.gsub(/\s+/, " ")
         end

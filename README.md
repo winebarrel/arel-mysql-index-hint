@@ -25,13 +25,19 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-Article.hint(idx_article: :force)
+Article.hint(force: :idx_article)
 #=> "SELECT `articles`.* FROM `articles` FORCE INDEX (`idx_article`)"
 
-Article.joins(:comments).hint(articles: {idx_article: :use})
+Article.hint(force: [:idx_article, :idx_article2])
+#=> "SELECT `articles`.* FROM `articles` FORCE INDEX (`idx_article`, `idx_article`)"
+
+Article.hint(use: :idx_article, ignore: :idx_article2)
+#=> "SELECT `articles`.* FROM `articles` USE INDEX (`idx_article`) IGNORE INDEX (`idx_article`)"
+
+Article.joins(:comments).hint(articles: {use: :idx_article})
 #=> "SELECT `articles`.* FROM `articles` USE INDEX (`idx_article`) INNER JOIN `comments` ON `comments`
 
-Article.joins(:comments).hint(comments: {idx_comment: :force})
+Article.joins(:comments).hint(comments: {force: :idx_comment})
 #=> "SELECT `articles`.* FROM `articles` INNER JOIN `comments` FORCE INDEX (`idx_comment`) ON `comments"
 ```
 

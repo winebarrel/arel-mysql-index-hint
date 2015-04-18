@@ -4,7 +4,7 @@ describe "arel-mysql-index-hint" do
       subject do
         User.
           joins(:microposts).
-          hint(microposts: {index_microposts_on_user_id_and_created_at: hint_type}).
+          hint(microposts: {hint_type => :index_microposts_on_user_id_and_created_at}).
           to_sql.gsub(/\s+/, " ")
       end
 
@@ -36,8 +36,8 @@ describe "arel-mysql-index-hint" do
         User.
           joins(:microposts).
           hint(
-            users: {index_users_on_email: hint_type},
-            microposts: {index_microposts_on_user_id_and_created_at: hint_type},
+            users: {hint_type => :index_users_on_email},
+            microposts: {hint_type => :index_microposts_on_user_id_and_created_at},
           ).
           to_sql.gsub(/\s+/, " ")
       end
@@ -69,7 +69,7 @@ describe "arel-mysql-index-hint" do
     context "when add hint before joins" do
       subject do
         User.
-          hint(microposts: {index_microposts_on_user_id_and_created_at: hint_type}).
+          hint(microposts: {hint_type => :index_microposts_on_user_id_and_created_at}).
           joins(:microposts).
           to_sql.gsub(/\s+/, " ")
       end

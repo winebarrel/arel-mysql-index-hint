@@ -4,7 +4,7 @@ describe "arel-mysql-index-hint" do
       User.
         where(id: 1).
         preload(:microposts).
-        hint(users: {index_users_on_email: hint_type}).
+        hint(users: {hint_type => :index_users_on_email}).
         to_sql.gsub(/\s+/, " ")
     end
 

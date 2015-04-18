@@ -2,7 +2,7 @@ describe "arel-mysql-index-hint" do
   context "unnested hint" do
     subject do
       User.
-        hint(index_users_on_email: hint_type).
+        hint(hint_type => :index_users_on_email).
         to_sql.gsub(/\s+/, " ")
     end
 
