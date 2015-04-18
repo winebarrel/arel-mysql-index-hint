@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = "arel-mysql-index-hint"
-  spec.version       = "0.1.2"
+  spec.version       = "0.1.3"
   spec.authors       = ["Genki Sugawara"]
   spec.email         = ["sgwr_dts@yahoo.co.jp"]
   spec.summary       = %q{Add index hint to MySQL query in Arel.}
