@@ -11,10 +11,11 @@ module ArelMysqlIndexHint
     end
 
     def mysql_index_hint_value
-      @values[:mysql_index_hint] ||= {}.with_indifferent_access
+      @values[:mysql_index_hint]
     end
 
     def hint(index_hint_by_table)
+      self.mysql_index_hint_value ||= {}.with_indifferent_access
       mysql_index_hint_value.update(index_hint_by_table)
       self
     end
