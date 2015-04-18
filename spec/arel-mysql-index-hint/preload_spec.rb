@@ -5,13 +5,13 @@ describe "arel-mysql-index-hint" do
         where(id: 1).
         preload(:microposts).
         hint(users: {index_users_on_email: hint_type}).
-        to_sql
+        to_sql.gsub(/\s+/, " ")
     end
 
     let(:sql) do
       "SELECT `users`.* " +
       "FROM `users` " +
-      "force INDEX (`index_users_on_email`)  " +
+      "#{hint_type.to_s.upcase} INDEX (`index_users_on_email`) " +
       "WHERE `users`.`id` = 1"
     end
 

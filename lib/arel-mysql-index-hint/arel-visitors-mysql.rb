@@ -19,11 +19,18 @@ module ArelMysqlIndexHint
     private
 
     def append_index_hint(sql, index_hint)
-      sql + " " + index_hint.map {|index, hint_type|
+      index_hint_sql = index_hint.map {|index, hint_type|
         index = Array(index).map {|i| quote_table_name(i) }
-
+        hint_type = hint_type.to_s.upcase
         "#{hint_type} INDEX (#{index.join(', ')})"
       }.join(", ")
+
+      if sql.is_a?(String)
+        sql + " " + index_hint_sql
+      else
+        sql << " " + index_hint_sql
+        sql
+      end
     end
   end
 end

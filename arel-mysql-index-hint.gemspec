@@ -14,8 +14,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "activerecord", "~> 4.1.0"
-  spec.add_dependency "arel", "~> 5.0.0"
+  spec.add_dependency "activerecord", ">= 4.1.0"
+  spec.add_dependency "arel", ">= 5.0.0"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", ">= 3.0.0"
   spec.add_development_dependency "factory_girl"
   spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "appraisal"
 end

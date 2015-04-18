@@ -16,7 +16,8 @@ require "models"
 $__arel_mysql_index_hint_sql_log__ = []
 
 ActiveSupport::Notifications.subscribe('sql.active_record') do |name, start, finish, id, payload|
-  $__arel_mysql_index_hint_sql_log__ << payload[:sql]
+  sql = payload[:sql]
+  $__arel_mysql_index_hint_sql_log__ << sql.gsub(/\s+/, " ") if sql
 end
 
 RSpec.configure do |config|

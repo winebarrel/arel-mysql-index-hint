@@ -4,13 +4,13 @@ describe "arel-mysql-index-hint" do
       User.
         all.
         hint(users: {index_users_on_email: hint_type}).
-        to_sql
+        to_sql.gsub(/\s+/, " ")
     end
 
     let(:sql) do
       "SELECT `users`.* " +
       "FROM `users` " +
-      "#{hint_type} INDEX (`index_users_on_email`)"
+      "#{hint_type.to_s.upcase} INDEX (`index_users_on_email`)"
     end
 
     let(:hint_type) { :force }
@@ -22,13 +22,13 @@ describe "arel-mysql-index-hint" do
     subject do
       User.
         hint(users: {index_users_on_email: hint_type}).
-        to_sql
+        to_sql.gsub(/\s+/, " ")
     end
 
     let(:sql) do
       "SELECT `users`.* " +
       "FROM `users` " +
-      "#{hint_type} INDEX (`index_users_on_email`)"
+      "#{hint_type.to_s.upcase} INDEX (`index_users_on_email`)"
     end
 
     let(:hint_type) { :force }
@@ -41,13 +41,13 @@ describe "arel-mysql-index-hint" do
       User.
         limit(1).
         hint(users: {index_users_on_email: hint_type}).
-        to_sql
+        to_sql.gsub(/\s+/, " ")
     end
 
     let(:sql) do
-      "SELECT  `users`.* " +
+      "SELECT `users`.* " +
       "FROM `users` " +
-      "#{hint_type} INDEX (`index_users_on_email`)  " +
+      "#{hint_type.to_s.upcase} INDEX (`index_users_on_email`) " +
       "LIMIT 1"
     end
 
@@ -64,8 +64,8 @@ describe "arel-mysql-index-hint" do
     end
 
     let(:sql) do
-      "SELECT  `users`.* FROM `users` " +
-      "#{hint_type} INDEX (`index_users_on_email`)   " +
+      "SELECT `users`.* FROM `users` " +
+      "#{hint_type.to_s.upcase} INDEX (`index_users_on_email`) " +
       "ORDER BY `users`.`id` ASC " +
       "LIMIT 1"
     end
@@ -74,7 +74,7 @@ describe "arel-mysql-index-hint" do
 
     it do
       subject
-      expect(sql_log).to include sql
+      expect(sql_log.first).to eq sql
     end
   end
 
@@ -86,8 +86,8 @@ describe "arel-mysql-index-hint" do
     end
 
     let(:sql) do
-      "SELECT  `users`.* FROM `users` " +
-      "#{hint_type} INDEX (`index_users_on_email`)  " +
+      "SELECT `users`.* FROM `users` " +
+      "#{hint_type.to_s.upcase} INDEX (`index_users_on_email`) " +
       "LIMIT 1"
     end
 
@@ -95,7 +95,7 @@ describe "arel-mysql-index-hint" do
 
     it do
       subject
-      expect(sql_log).to include sql
+      expect(sql_log.first).to eq sql
     end
   end
 end
