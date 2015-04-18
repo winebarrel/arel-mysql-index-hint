@@ -1,6 +1,6 @@
 describe "arel-mysql-index-hint" do
   describe "#joins" do
-    context "single index" do
+    context "when single index" do
       subject do
         User.
           joins(:microposts).
@@ -31,7 +31,7 @@ describe "arel-mysql-index-hint" do
       end
     end
 
-    context "multiple indexes" do
+    context "when multiple indexes" do
       subject do
         User.
           joins(:microposts).
@@ -66,7 +66,27 @@ describe "arel-mysql-index-hint" do
       end
     end
 
-    context "without index" do
+    context "when add hint before joins" do
+      subject do
+        User.
+          hint(microposts: {index_microposts_on_user_id_and_created_at: hint_type}).
+          joins(:microposts).
+          to_sql
+      end
+
+      let(:sql) do
+        "SELECT `users`.* FROM `users` " +
+        "INNER JOIN `microposts` " +
+        "#{hint_type} INDEX (index_microposts_on_user_id_and_created_at) " +
+        "ON `microposts`.`user_id` = `users`.`id`"
+      end
+
+      let(:hint_type) { :force }
+
+      it { is_expected.to eq sql }
+    end
+
+    context "when without index" do
       subject do
         User.
           joins(:microposts).
