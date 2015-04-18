@@ -34,3 +34,7 @@ Article.joins(:comments).hint(articles: {idx_article: :use})
 Article.joins(:comments).hint(comments: {idx_comment: :force})
 # => "SELECT `articles`.* FROM `articles` INNER JOIN `comments` FORCE INDEX (`idx_comment`) ON `comments"
 ```
+
+## Related Links
+
+* [MySQL ::   MySQL 5.6 Reference Manual :: 13.2.9.3 Index Hint Syntax](view-source:https://dev.mysql.com/doc/refman/5.6/en/index-hints.html)
