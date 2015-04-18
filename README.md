@@ -37,4 +37,4 @@ Article.joins(:comments).hint(comments: {idx_comment: :force})
 
 ## Related Links
 
-* [MySQL ::   MySQL 5.6 Reference Manual :: 13.2.9.3 Index Hint Syntax](view-source:https://dev.mysql.com/doc/refman/5.6/en/index-hints.html)
+* [MySQL::MySQL 5.6 Reference Manual::13.2.9.3 Index Hint Syntax](https://dev.mysql.com/doc/refman/5.6/en/index-hints.html)
