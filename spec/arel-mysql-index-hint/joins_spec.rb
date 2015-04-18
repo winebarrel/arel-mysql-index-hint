@@ -69,7 +69,7 @@ describe "arel-mysql-index-hint" do
     context "when add hint before joins" do
       subject do
         User.
-          hint(microposts: {index_microposts_on_user_id_and_created_at: hint_type}).
+          hint(microposts: {index_microposts_on_user_id_and_created_at: :force}).
           joins(:microposts).
           to_sql
       end
@@ -77,11 +77,9 @@ describe "arel-mysql-index-hint" do
       let(:sql) do
         "SELECT `users`.* FROM `users` " +
         "INNER JOIN `microposts` " +
-        "#{hint_type} INDEX (index_microposts_on_user_id_and_created_at) " +
+        "force INDEX (index_microposts_on_user_id_and_created_at) " +
         "ON `microposts`.`user_id` = `users`.`id`"
       end
-
-      let(:hint_type) { :force }
 
       it { is_expected.to eq sql }
     end
