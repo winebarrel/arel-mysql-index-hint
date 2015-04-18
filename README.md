@@ -2,6 +2,10 @@
 
 Add index hint to MySQL query in Arel.
 
+[![Gem Version](https://badge.fury.io/rb/arel-mysql-index-hint.svg)](http://badge.fury.io/rb/arel-mysql-index-hint)
+[![Build Status](https://travis-ci.org/winebarrel/arel-mysql-index-hint.svg?branch=master)](https://travis-ci.org/winebarrel/arel-mysql-index-hint)
+[![Coverage Status](https://img.shields.io/coveralls/winebarrel/arel-mysql-index-hint.svg)](https://coveralls.io/r/winebarrel/arel-mysql-index-hint?branch=master)
+
 ## Installation
 
 Add this line to your application's Gemfile:
