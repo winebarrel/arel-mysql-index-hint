@@ -25,6 +25,9 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+Article.hint(idx_article: :force)
+# => "SELECT `articles`.* FROM `articles` force INDEX (idx_article)"
+
 Article.joins(:comments).hint(articles: {idx_article: :use})
 # => "SELECT `articles`.* FROM `articles` use INDEX (idx_article) INNER JOIN `comments` ON `comments`
 
