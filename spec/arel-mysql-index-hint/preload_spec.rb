@@ -11,7 +11,7 @@ describe "arel-mysql-index-hint" do
     let(:sql) do
       "SELECT `users`.* " +
       "FROM `users` " +
-      "force INDEX (index_users_on_email)  " +
+      "force INDEX (`index_users_on_email`)  " +
       "WHERE `users`.`id` = 1"
     end
 

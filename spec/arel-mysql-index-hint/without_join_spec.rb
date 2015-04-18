@@ -10,7 +10,7 @@ describe "arel-mysql-index-hint" do
     let(:sql) do
       "SELECT `users`.* " +
       "FROM `users` " +
-      "#{hint_type} INDEX (index_users_on_email)"
+      "#{hint_type} INDEX (`index_users_on_email`)"
     end
 
     let(:hint_type) { :force }
@@ -28,7 +28,7 @@ describe "arel-mysql-index-hint" do
     let(:sql) do
       "SELECT `users`.* " +
       "FROM `users` " +
-      "#{hint_type} INDEX (index_users_on_email)"
+      "#{hint_type} INDEX (`index_users_on_email`)"
     end
 
     let(:hint_type) { :force }
@@ -47,7 +47,7 @@ describe "arel-mysql-index-hint" do
     let(:sql) do
       "SELECT  `users`.* " +
       "FROM `users` " +
-      "#{hint_type} INDEX (index_users_on_email)  " +
+      "#{hint_type} INDEX (`index_users_on_email`)  " +
       "LIMIT 1"
     end
 
@@ -65,7 +65,7 @@ describe "arel-mysql-index-hint" do
 
     let(:sql) do
       "SELECT  `users`.* FROM `users` " +
-      "#{hint_type} INDEX (index_users_on_email)   " +
+      "#{hint_type} INDEX (`index_users_on_email`)   " +
       "ORDER BY `users`.`id` ASC " +
       "LIMIT 1"
     end
@@ -87,7 +87,7 @@ describe "arel-mysql-index-hint" do
 
     let(:sql) do
       "SELECT  `users`.* FROM `users` " +
-      "#{hint_type} INDEX (index_users_on_email)  " +
+      "#{hint_type} INDEX (`index_users_on_email`)  " +
       "LIMIT 1"
     end
 

@@ -44,7 +44,8 @@ class Arel::Visitors::MySQL
 
   def append_index_hint(sql, index_hint)
     sql + " " + index_hint.map {|index, hint_type|
-      index = Array(index)
+      index = Array(index).map {|i| quote_table_name(i) }
+
       "#{hint_type} INDEX (#{index.join(', ')})"
     }.join(", ")
   end

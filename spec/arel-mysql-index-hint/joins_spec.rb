@@ -11,7 +11,7 @@ describe "arel-mysql-index-hint" do
       let(:sql) do
         "SELECT `users`.* FROM `users` " +
         "INNER JOIN `microposts` " +
-        "#{hint_type} INDEX (index_microposts_on_user_id_and_created_at) " +
+        "#{hint_type} INDEX (`index_microposts_on_user_id_and_created_at`) " +
         "ON `microposts`.`user_id` = `users`.`id`"
       end
 
@@ -44,9 +44,9 @@ describe "arel-mysql-index-hint" do
 
       let(:sql) do
         "SELECT `users`.* FROM `users` " +
-        "#{hint_type} INDEX (index_users_on_email) " +
+        "#{hint_type} INDEX (`index_users_on_email`) " +
         "INNER JOIN `microposts` " +
-        "#{hint_type} INDEX (index_microposts_on_user_id_and_created_at) " +
+        "#{hint_type} INDEX (`index_microposts_on_user_id_and_created_at`) " +
         "ON `microposts`.`user_id` = `users`.`id`"
       end
 
@@ -77,7 +77,7 @@ describe "arel-mysql-index-hint" do
       let(:sql) do
         "SELECT `users`.* FROM `users` " +
         "INNER JOIN `microposts` " +
-        "#{hint_type} INDEX (index_microposts_on_user_id_and_created_at) " +
+        "#{hint_type} INDEX (`index_microposts_on_user_id_and_created_at`) " +
         "ON `microposts`.`user_id` = `users`.`id`"
       end
 
