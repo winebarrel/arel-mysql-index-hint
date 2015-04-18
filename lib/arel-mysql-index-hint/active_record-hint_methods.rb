@@ -16,7 +16,7 @@ module ArelMysqlIndexHint
 
     def hint(index_hint_by_table)
       self.mysql_index_hint_value ||= {}.with_indifferent_access
-      mysql_index_hint_value.update(index_hint_by_table)
+      mysql_index_hint_value.deep_merge!(index_hint_by_table)
       self
     end
 
