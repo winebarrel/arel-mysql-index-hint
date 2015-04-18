@@ -74,7 +74,6 @@ describe "arel-mysql-index-hint" do
 
     it do
       subject
-
       expect(sql_log).to include sql
     end
   end
@@ -96,7 +95,6 @@ describe "arel-mysql-index-hint" do
 
     it do
       subject
-
       expect(sql_log).to include sql
     end
   end
