@@ -41,6 +41,27 @@ Article.joins(:comments).hint(comments: {force: :idx_comment})
 #=> "SELECT `articles`.* FROM `articles` INNER JOIN `comments` FORCE INDEX (`idx_comment`) ON `comments"
 ```
 
+## Running tests
+
+```sh
+docker-compose up -d
+bundle install
+bundle exec appraisal install
+bundle exec appraisal activerecord-4.0 rake
+bundle exec appraisal activerecord-4.1 rake
+bundle exec appraisal activerecord-4.2 rake
+```
+
+**Notice:** mysql-client is required.
+
+### on OS X (docker-machine & VirtualBox)
+
+Port forwarding is required.
+
+```sh
+VBoxManage controlvm default natpf1 "mysql,tcp,127.0.0.1,3306,,3306"
+```
+
 ## Related Links
 
 * [MySQL::MySQL 5.6 Reference Manual::13.2.9.3 Index Hint Syntax](https://dev.mysql.com/doc/refman/5.6/en/index-hints.html)
