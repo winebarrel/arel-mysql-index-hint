@@ -1,11 +1,5 @@
 module ArelMysqlIndexHint
   module ActiveRecordHintMethods
-    extend ActiveSupport::Concern
-
-    included do
-      alias_method_chain :build_arel, :mysql_index_hint
-    end
-
     def mysql_index_hint_value=(value)
       @values[:mysql_index_hint] = value
     end
@@ -20,8 +14,8 @@ module ArelMysqlIndexHint
       self
     end
 
-    def build_arel_with_mysql_index_hint
-      arel = build_arel_without_mysql_index_hint
+    def build_arel
+      arel = super
 
       if mysql_index_hint_value.present?
         if mysql_index_hint_value.values.any? {|i| i.is_a?(Hash) }

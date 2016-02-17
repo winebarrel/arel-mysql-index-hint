@@ -7,7 +7,7 @@ ActiveSupport.on_load :active_record do
   require "arel-mysql-index-hint/arel-visitors-mysql"
 
   ActiveRecord::Relation.class_eval do
-    include ArelMysqlIndexHint::ActiveRecordHintMethods
+    prepend ArelMysqlIndexHint::ActiveRecordHintMethods
   end
 
   ActiveRecord::Querying.class_eval do
@@ -15,10 +15,10 @@ ActiveSupport.on_load :active_record do
   end
 
   Arel::Table.class_eval do
-    include ArelMysqlIndexHint::ArelTable
+    prepend ArelMysqlIndexHint::ArelTable
   end
 
   Arel::Visitors::MySQL.class_eval do
-    include ArelMysqlIndexHint::ArelVisitorsMySQL
+    prepend ArelMysqlIndexHint::ArelVisitorsMySQL
   end
 end
