@@ -1,4 +1,4 @@
-if ActiveRecord::VERSION::MINOR >= 1
+if ActiveRecord::VERSION::STRING >= "4.1"
   describe "arel-mysql-index-hint" do
     describe "#includes" do
       context "when single index" do

@@ -50,6 +50,7 @@ bundle exec appraisal install
 bundle exec appraisal activerecord-4.0 rake
 bundle exec appraisal activerecord-4.1 rake
 bundle exec appraisal activerecord-4.2 rake
+bundle exec appraisal activerecord-5.0 rake
 ```
 
 **Notice:** mysql-client is required.
