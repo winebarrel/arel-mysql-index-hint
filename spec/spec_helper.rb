@@ -41,10 +41,6 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    if ActiveRecord::VERSION::STRING >= "5.0" and RUBY_VERSION < "2.2"
-      skip
-    end
-
     $__arel_mysql_index_hint_sql_log__.clear
   end
 end
